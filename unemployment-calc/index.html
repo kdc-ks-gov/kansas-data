@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Kansas Unemployment During COVID-19 | Kansas Economic Data</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Kansas Unemployment During COVID-19" />
+<meta name="author" content="Nigel Soria" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Back-of-the-Envelope Estimates of the Kansas Unemployment Rate for the Second Quarter of 2020" />
+<meta property="og:description" content="Back-of-the-Envelope Estimates of the Kansas Unemployment Rate for the Second Quarter of 2020" />
+<link rel="canonical" href="https://kdc-ks-gov.github.io/kansas-data/unemployment-calc/" />
+<meta property="og:url" content="https://kdc-ks-gov.github.io/kansas-data/unemployment-calc/" />
+<meta property="og:site_name" content="Kansas Economic Data" />
+<meta property="og:image" content="https://kdc-ks-gov.github.io/kansas-data/images/ks-unemp.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-04-01T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://kdc-ks-gov.github.io/kansas-data/unemployment-calc/","@type":"BlogPosting","headline":"Kansas Unemployment During COVID-19","dateModified":"2020-04-01T00:00:00-05:00","datePublished":"2020-04-01T00:00:00-05:00","image":"https://kdc-ks-gov.github.io/kansas-data/images/ks-unemp.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://kdc-ks-gov.github.io/kansas-data/unemployment-calc/"},"author":{"@type":"Person","name":"Nigel Soria"},"description":"Back-of-the-Envelope Estimates of the Kansas Unemployment Rate for the Second Quarter of 2020","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/kansas-data/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://kdc-ks-gov.github.io/kansas-data/feed.xml" title="Kansas Economic Data" /><link rel="shortcut icon" type="image/x-icon" href="/kansas-data/images/favicon.ico"><link href="https://cdn.jsdelivr.net/npm/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css"><script src="https://hypothes.is/embed.js" async></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/kansas-data/">Kansas Economic Data</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/kansas-data/about/">About</a><a class="page-link" href="/kansas-data/search/">Search</a><a class="page-link" href="/kansas-data/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Kansas Unemployment During COVID-19</h1><p class="page-description">Back-of-the-Envelope Estimates of the Kansas Unemployment Rate for the Second Quarter of 2020</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-04-01T00:00:00-05:00" itemprop="datePublished">
+        Apr 1, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Nigel Soria</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/kansas-data/categories/#labor statistics">labor statistics</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/kansas-data/categories/#unemployment rate">unemployment rate</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/kansas-data/categories/#essential worker">essential worker</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/kansas-data/categories/#work context">work context</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/kdc-ks-gov/kansas-data/tree/master/_notebooks/2020-04-01-unemployment-calculation.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/kansas-data/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/kdc-ks-gov/kansas-data/master?filepath=_notebooks%2F2020-04-01-unemployment-calculation.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/kansas-data/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/kdc-ks-gov/kansas-data/blob/master/_notebooks/2020-04-01-unemployment-calculation.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/kansas-data/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Background">Background </a></li>
+<li class="toc-entry toc-h1"><a href="#Current-Labor-Statistics">Current Labor Statistics </a></li>
+<li class="toc-entry toc-h1"><a href="#Methodology">Methodology </a></li>
+<li class="toc-entry toc-h1"><a href="#Calculating-the-Second-Quarter-Unemployment-Rate">Calculating the Second-Quarter Unemployment Rate </a></li>
+<li class="toc-entry toc-h1"><a href="#Sensitivity-Analysis">Sensitivity Analysis </a></li>
+<li class="toc-entry toc-h1"><a href="#Summary-of-Calculations">Summary of Calculations </a></li>
+<li class="toc-entry toc-h1"><a href="#Other-Limitations-and-Areas-for-Improvement">Other Limitations and Areas for Improvement </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-04-01-unemployment-calculation.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Background">
+<a class="anchor" href="#Background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background<a class="anchor-link" href="#Background"> </a>
+</h1>
+<p>Many businesses are experiencing large decreases in sales and revenue as a result of state and local stay-at-home orders associated with the COVID-19 pandemic, and these businesses are already responding to potential solvency and liquidity problems by laying off workers.  Accordingly, the question of the day is:  How high will the unemployment rate be in the second quarter of 2020?</p>
+<p>Not all businesses, sectors, or occupations will experience the negative shock from COVID-19 equally.  Many workers, such as those in professional services, may be able to work from home and continue their activities with minimal disruption. Other workers, such as those who work in occupations that involve direct physical contact with customers (e.g., restaurant waitstaff), are likely to see their jobs negatively affected by social-distancing measures and stay-at-home orders.</p>
+<p>In this notebook, I use Kansas-specific data on occupation composition to replicate <a href="https://www.stlouisfed.org/on-the-economy/2020/march/back-envelope-estimates-next-quarters-unemployment-rate" title="Back-of-the-Envelope Estimates of Next Quarter’s Unemployment Rate">recent analysis</a> by the St. Louis Fed, which attempts to arrive at an estimate of what the unemployment rate may look like at the end of the second quarter of 2020.  The St. Louis Fed estimates a 32.1 percent unemployment rate for the second quarter of 2020.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Current-Labor-Statistics">
+<a class="anchor" href="#Current-Labor-Statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Labor Statistics<a class="anchor-link" href="#Current-Labor-Statistics"> </a>
+</h1>
+<p>I start with the state of the Kansas economy as of February 2020. According to the Kansas Department of Labor (via KLIC), the civilian labor force consisted of approxiately 1.5 million people, and the seasonally-adjusted unemployment rate was 3.1%, which means there were around 46,000 unemployed Kansans in February. In the calculations that follow, I assumed the labor force remains constant and that none of the currently unemployed individuals would be able to find a job in the second quarter of 2020.</p>
+<p>To estimate the Kansas unemployment rate for the second quarter of 2020, I follow recent analysis by the St. Louis Fed and combine occupation composition data from the Bureau of Labor Statistics with work context data from O*Net Online to compute how many jobs are exposed to layoff risk due to social distancing measures and stay-at-home orders.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Current labor statistics from the Kansas Department of Labor (February 2020):
+Civilian Labor Force = 1,496,507
+Unemployment Rate = 3.1%
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Methodology">
+<a class="anchor" href="#Methodology" aria-hidden="true"><span class="octicon octicon-link"></span></a>Methodology<a class="anchor-link" href="#Methodology"> </a>
+</h1>
+<p>In a <a href="https://www.stlouisfed.org/on-the-economy/2020/march/social-distancing-contact-intensive-occupations" title="Social Distancing and Contact-Intensive Occupations">recent article</a>, Matthew Famiglietti, Fernando Leibovici and Ana Maria Santacreu combine individual-level data from the 2017 American Community Survey with information on occupational contact intensity from O*NET to determine how many people work in occupations that require the worker to perform tasks in close physical proximity to other people. They find that 27.3 million workers have occupations with a high contact intensity. These occupations include barbers, hairstylists, food and beverage serving workers, and flight attendants, among others.</p>
+<p>In <a href="https://www.stlouisfed.org/on-the-economy/2020/march/covid-19-workers-highest-unemployment-risk" title="COVID-19: Which Workers Face the Highest Unemployment Risk?">another article</a>, Charles Gascon uses Occupation Employment Statistics from the Bureau of Labor Statistics to determine which occupations face a high risk of unemployment, and he estimates that 46 percent, or approximately 67 million U.S. workers, face a high risk of being laid off.</p>
+<p>I combine the approaches from the two articles and merge state-level occupation composition data from the Bureau of Labor Statics with information on occupational contact intensity from O*NET.  I saved some time by extracting the contact intensity information from the Famiglietti, Leibovici, and Santacreu dataset as it is publicly available.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>area</th>
+      <th>area_title</th>
+      <th>area_type</th>
+      <th>naics</th>
+      <th>naics_title</th>
+      <th>i_group</th>
+      <th>own_code</th>
+      <th>occ_code</th>
+      <th>occ_title</th>
+      <th>o_group</th>
+      <th>...</th>
+      <th>h_median</th>
+      <th>h_pct75</th>
+      <th>h_pct90</th>
+      <th>a_pct10</th>
+      <th>a_pct25</th>
+      <th>a_median</th>
+      <th>a_pct75</th>
+      <th>a_pct90</th>
+      <th>annual</th>
+      <th>hourly</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10938</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1011</td>
+      <td>Chief Executives</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>69.85</td>
+      <td>#</td>
+      <td>#</td>
+      <td>37580</td>
+      <td>96030</td>
+      <td>145280</td>
+      <td>#</td>
+      <td>#</td>
+      <td>nan</td>
+      <td>nan</td>
+    </tr>
+    <tr>
+      <th>10939</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1021</td>
+      <td>General and Operations Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>38.33</td>
+      <td>58.19</td>
+      <td>85.65</td>
+      <td>43300</td>
+      <td>57610</td>
+      <td>79720</td>
+      <td>121040</td>
+      <td>178140</td>
+      <td>nan</td>
+      <td>nan</td>
+    </tr>
+    <tr>
+      <th>10940</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1031</td>
+      <td>Legislators</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>*</td>
+      <td>*</td>
+      <td>*</td>
+      <td>16150</td>
+      <td>16930</td>
+      <td>18230</td>
+      <td>19590</td>
+      <td>28430</td>
+      <td>TRUE</td>
+      <td>nan</td>
+    </tr>
+    <tr>
+      <th>10941</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-2011</td>
+      <td>Advertising and Promotions Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>48.02</td>
+      <td>69.85</td>
+      <td>98.29</td>
+      <td>55660</td>
+      <td>66490</td>
+      <td>99880</td>
+      <td>145290</td>
+      <td>204450</td>
+      <td>nan</td>
+      <td>nan</td>
+    </tr>
+    <tr>
+      <th>10942</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-2021</td>
+      <td>Marketing Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>63.9</td>
+      <td>87.05</td>
+      <td>#</td>
+      <td>68090</td>
+      <td>94480</td>
+      <td>132910</td>
+      <td>181060</td>
+      <td>#</td>
+      <td>nan</td>
+      <td>nan</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 30 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The Kansas Occupation Employment Statistics data contain a column named <code>occ_code</code>, which represents the six-digit occupation code; however, the Famiglietti, Leibovici, and Santacreu data contain a four digit occupation code (and no hyphen), so we need to create a similar field in the Kansas dataset that we can use to match the Famiglietti-Leibovici-Santacreu data.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>area</th>
+      <th>area_title</th>
+      <th>area_type</th>
+      <th>naics</th>
+      <th>naics_title</th>
+      <th>i_group</th>
+      <th>own_code</th>
+      <th>occ_code</th>
+      <th>occ_title</th>
+      <th>o_group</th>
+      <th>...</th>
+      <th>a_pct75</th>
+      <th>a_pct90</th>
+      <th>annual</th>
+      <th>hourly</th>
+      <th>soc</th>
+      <th>prox_index</th>
+      <th>score</th>
+      <th>essential</th>
+      <th>home_work</th>
+      <th>category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1011</td>
+      <td>Chief Executives</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>#</td>
+      <td>#</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>1110</td>
+      <td>48.66666793823242</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>General and Operations Managers</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1021</td>
+      <td>General and Operations Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>121040</td>
+      <td>178140</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>1110</td>
+      <td>48.66666793823242</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>General and Operations Managers</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-1031</td>
+      <td>Legislators</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>19590</td>
+      <td>28430</td>
+      <td>TRUE</td>
+      <td>nan</td>
+      <td>1110</td>
+      <td>48.66666793823242</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>General and Operations Managers</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-2011</td>
+      <td>Advertising and Promotions Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>145290</td>
+      <td>204450</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>1120</td>
+      <td>43.400001525878906</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>Public Relations and Fundraising Managers</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>20</td>
+      <td>Kansas</td>
+      <td>2</td>
+      <td>000000</td>
+      <td>Cross-industry</td>
+      <td>cross-industry</td>
+      <td>1235</td>
+      <td>11-2021</td>
+      <td>Marketing Managers</td>
+      <td>detailed</td>
+      <td>...</td>
+      <td>181060</td>
+      <td>#</td>
+      <td>nan</td>
+      <td>nan</td>
+      <td>1120</td>
+      <td>43.400001525878906</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>Public Relations and Fundraising Managers</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 36 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Calculating-the-Second-Quarter-Unemployment-Rate">
+<a class="anchor" href="#Calculating-the-Second-Quarter-Unemployment-Rate" aria-hidden="true"><span class="octicon octicon-link"></span></a>Calculating the Second-Quarter Unemployment Rate<a class="anchor-link" href="#Calculating-the-Second-Quarter-Unemployment-Rate"> </a>
+</h1>
+<p>The St. Louis Fed analysis averages the numbers from the Famiglietti-Leibovici-Santacreu and Gascon articles to arrive at a point estimate of the number of workers at risk of being laid off during the second quarter.  This results in approximately 47 million people being laid off during this period.  This is quite high as it assumes everyone in a "high risk" occupation will become laid off.  Therefore, I depart from the St. Louis Fed analysis by taking into account the fact that some occupations have been designated as essential and face a lower risk of layoff. Using guidance from the Kansas Essential Functions Framework, I added a field to the Famiglietti, Leibovici, and Santacreu data that indicates whether an occupation is essential.</p>
+<p>To calculate the expected layoffs, I added the numbers for the occupations in the highest contact intensity category (following followed Famiglietti, Leibovici, and Santacreu), and I subtracted the numbers from occupations that are essential (my innovation).  Adding the expected layoffs to the initial number of unemployed in February results in approximately 66,000 total unemployed Kansans.  Given the assumption of a constant labor force, this results in an unemployment rate of 4.4 percent.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Steps to calculate the estimated unemployment rate (using data from Method 1):
+1. Kansas civilian labor force in February 2020 = 1,496,507 (KDOL)
+2. Kansas unemployment rate in February 2020 = 3.1% (KDOL)
+3. Unemployed Kansans in February 2020 = 46,392 (#1 * #2)
+4. Kansas workers in high contact-intensive occupations = 293,880 (Nigel's calculations using O*Net data)
+5. Kansas workers employed in "essential" occupations = 274,370 (Nigel's calculations using KEFF guidance)
+6. Estimated layoffs in second quarter 2020 = 19,510 (#4 - #5)
+7. Unemployed Kansans in second quarter 2020 = 65,902 (#3 + #6)
+8. Kansas unemployment rate in second quarter 2020 = 4.4% (#7 / #1)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Sensitivity-Analysis">
+<a class="anchor" href="#Sensitivity-Analysis" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sensitivity Analysis<a class="anchor-link" href="#Sensitivity-Analysis"> </a>
+</h1>
+<p>The St. Louis Fed estimate of 32.1 percent seems a bit high, but my estimate of 4.4 percent seems very low, especially given the large spike in the number unemployment insurance claims.  This is because my estimate assumes everyone in an "essential" occupation will retain his or her job, which is probably not the case.  For example, restaurants need cooks and delivery drivers, but they do not need waitstaff right now.  Some waiters and waitresses may assist with deliveries, which may keep their hours from getting cut, but dishwashers will work fewer hours as they will be washing fewer dishes.  We can look at the sensitivity of the estimated unemployment rate to different assumptions in the retention rate of essential occupations.  That is, maybe restaurants will only retain 50 percent of their staff instead of 100 percent as the estimate currently assumes.</p>
+<p>The graph below shows the calculated unemployment rate based on different retention rates for essential occupations.  The estimated Kansas unemployment rate for Q2 2002 ranges from 4.4 percent to 22.7 percent, where 22.7 percent assumes no retention of essential occupations (similar to the St. Louis Fed analysis).</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Summary-of-Calculations">
+<a class="anchor" href="#Summary-of-Calculations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary of Calculations<a class="anchor-link" href="#Summary-of-Calculations"> </a>
+</h1>
+<p>It is important to note that the estimates make several important assumptions:</p>
+<ul>
+<li>the calculations assume the labor force is constant and exclude the fact that some recently unemployed workers may become discouraged and cease looking for employment (i.e., no longer technically unemployed);</li>
+<li>many businesses may send workers home with pay, rather than laying them off;</li>
+<li>only occupations with a proximity score of 2 are at risk of being layed off;</li>
+<li>the sensitivity analysis assumes retention rates are the same accross all occupations; and </li>
+<li>the calculations do not account for any potential effects of fiscal measures, such as the recent stimulus package or changes in unemployment insurance policy.</li>
+</ul>
+<p>It is also important to keep in mind that these are rough calculations.  As such, any attempts to place upper and lower bounds on these estimates would follow the same inexact process.  The estimates are sensitive to a number of assumptions, but we may be able to relax some of these assumptions with better and more up-to-date data.</p>
+<p>The expected duration of unemployment matters just as much, if not more, than the unemployment rate itself, especially if the recovery is quicker than we anticipate; however, the uncertainty around when and where it will be safe to resume certain economic activity makes <em>ex ante</em> analysis of the economic impact of COVID-19 somewhat impossible.  At best, we can look at what may happen if different scenarios unfold.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Other-Limitations-and-Areas-for-Improvement">
+<a class="anchor" href="#Other-Limitations-and-Areas-for-Improvement" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Limitations and Areas for Improvement<a class="anchor-link" href="#Other-Limitations-and-Areas-for-Improvement"> </a>
+</h1>
+<p>Even though I followed guidance from the Kansas Essential Functions Framework, the designation of occupations as essential is somewhat subjective.  It might be nice to have others weigh in on which occupations meet the conditions of these guidelines.</p>
+<p>Also, I started working on adding a field that indicates which positions may be performed from home (we would be able to subtract these from the unemployed as well), but this is also very subjective.  I thought O*NET might also have some sort of "work-from-home" score, but I haven't been able to find anything like that yet.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/kansas-data/unemployment-calc/" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/kansas-data/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/kansas-data/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/kansas-data/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A site containing statistics and visualizations for Kansas economic data.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/kdc-ks-gov" title="kdc-ks-gov"><svg class="svg-icon grey"><use xlink:href="/kansas-data/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/KansasCommerce" title="KansasCommerce"><svg class="svg-icon grey"><use xlink:href="/kansas-data/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
